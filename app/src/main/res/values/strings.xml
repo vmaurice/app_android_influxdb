@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">sam</string>
+    <string name="home_welcome">Bienvenue \n \n Gestion de son environnement</string>
+    <string name="title_activity_temp">temp</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="submit">Submit</string>
+
+    <string-array name="past_search">
+        <item>past 5m</item>
+        <item>past 15m</item>
+        <item>past 30m</item>
+        <item>past 1h</item>
+        <item>past 4h</item>
+        <item>past 12h</item>
+        <item>past 24h</item>
+        <item>all</item>
+    </string-array>
+
+    <string-array name="setting_mode">
+        <item>Clair</item>
+        <item>Sombre</item>
+    </string-array>
+</resources>

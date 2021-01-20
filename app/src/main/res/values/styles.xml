@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+      background
+    -->
+    <style name="back_black">
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="back_white">
+        <item name="android:background">@color/white</item>
+    </style>
+    <!--
+          txt
+        -->
+    <style name="txt_black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="txt_white">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="txt_red">
+        <item name="android:textColor">@color/purple_200</item>
+    </style>
+    <!--
+          spinner
+        -->
+    <style name="spinner_black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="spinner_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="root" format="reference"/>
+    <attr name="txt" format="reference"/>
+    <attr name="spinner" format="reference"/>
+</resources>
