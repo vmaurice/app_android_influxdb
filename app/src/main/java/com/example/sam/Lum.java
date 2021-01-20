@@ -16,11 +16,14 @@ import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Lum extends AppCompatActivity {
 
@@ -105,8 +108,9 @@ public class Lum extends AppCompatActivity {
 
 
                         graph.getViewport().setYAxisBoundsManual(true);
-                        graph.getViewport().setMinY(20);
-                        graph.getViewport().setMaxY(30);
+                        graph.getViewport().setMaxY(200);
+
+                        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getBaseContext(), DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT, new Locale("FR", "fr"))));
 
 
                         //graph.getGridLabelRenderer().setNumHorizontalLabels(3);
@@ -118,7 +122,7 @@ public class Lum extends AppCompatActivity {
                         for (FluxTable fluxTable : tables) {
                             List<FluxRecord> records = fluxTable.getRecords();
                             for (FluxRecord fluxRecord : records) {
-                                Date d = new Date(fluxRecord.getTime().getEpochSecond());
+                                Date d = new Date(fluxRecord.getTime().toEpochMilli());
                                 series.appendData( new DataPoint(d,(double)fluxRecord.getValueByKey("_value")),true,records.size());
                             }
                         }

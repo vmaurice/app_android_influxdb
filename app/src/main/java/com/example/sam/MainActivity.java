@@ -116,61 +116,73 @@ public class MainActivity extends AppCompatActivity {
 
                 List<FluxTable> tables;
 
-                String flux = "from(bucket: \"sensors\") |> range(start: 0) |> last() |> filter(fn: (r) => r[\"topic\"] == \"sensors/kerno/bedroom/temperature\")";
 
-                try {
+                while (true) {
 
-                    tables = influxDBClient.getQueryApi().query(flux);
+                    try {
+
+                        String flux = "from(bucket: \"sensors\") |> range(start: 0) |> last() |> filter(fn: (r) => r[\"topic\"] == \"sensors/kerno/bedroom/temperature\")";
 
 
-                    for (FluxTable fluxTable : tables) {
-                        List<FluxRecord> records = fluxTable.getRecords();
-                        for (FluxRecord fluxRecord : records) {
-                            //System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-                            temp_value = fluxRecord.getValueByKey("_value").toString();
+                        tables = influxDBClient.getQueryApi().query(flux);
+
+
+                        for (FluxTable fluxTable : tables) {
+                            List<FluxRecord> records = fluxTable.getRecords();
+                            for (FluxRecord fluxRecord : records) {
+                                //System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
+                                temp_value = fluxRecord.getValueByKey("_value").toString();
+                            }
                         }
+
+                        System.out.println("La température est de " + temp_value);
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                txt_temp.setText("La température est de " + temp_value);
+                            }
+                        });
+
+
+                        flux = "from(bucket: \"sensors\") |> range(start: 0) |> last() |> filter(fn: (r) => r[\"topic\"] == \"sensors/kerno/bedroom/luminosity\")";
+
+
+                        tables = influxDBClient.getQueryApi().query(flux);
+
+
+                        for (FluxTable fluxTable : tables) {
+                            List<FluxRecord> records = fluxTable.getRecords();
+                            for (FluxRecord fluxRecord : records) {
+                                //System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
+                                lum_value = fluxRecord.getValueByKey("_value").toString();
+                            }
+                        }
+
+                        System.out.println("La luminosité est de " + lum_value);
+
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                txt_lum.setText("La luminosité est de " + lum_value);
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(5000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                    System.out.println("La température est de " + temp_value);
 
 
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            txt_temp.setText("La température est de " + temp_value);
-                        }
-                    });
-
-
-                    flux = "from(bucket: \"sensors\") |> range(start: 0) |> last() |> filter(fn: (r) => r[\"topic\"] == \"sensors/kerno/bedroom/luminosity\")";
-
-
-                    tables = influxDBClient.getQueryApi().query(flux);
-
-
-                    for (FluxTable fluxTable : tables) {
-                        List<FluxRecord> records = fluxTable.getRecords();
-                        for (FluxRecord fluxRecord : records) {
-                            //System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-                            lum_value = fluxRecord.getValueByKey("_value").toString();
-                        }
-                    }
-
-                    System.out.println("La luminosité est de " + lum_value);
-
-
-
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            txt_lum.setText("La luminosité est de " + lum_value);
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
 
 
