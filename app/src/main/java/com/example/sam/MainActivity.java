@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            batteryTxt.setText("Pourcentage de batterie " +String.valueOf(level) + "%");
+            batteryTxt.setText("Pourcentage de la batterie " +String.valueOf(level) + "%");
         }
     };
 
@@ -135,13 +135,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        System.out.println("La température est de " + temp_value);
+                        System.out.println("La température est de " + temp_value + "°C");
 
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                txt_temp.setText("La température est de " + temp_value);
+                                txt_temp.setText("La température est de " + temp_value + "°C");
                             }
                         });
 
@@ -160,13 +160,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        System.out.println("La luminosité est de " + lum_value);
+                        System.out.println("La luminosité est de " + lum_value + " lux");
 
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                txt_lum.setText("La luminosité est de " + lum_value);
+                                txt_lum.setText("La luminosité est de " + lum_value + " lux");
                             }
                         });
 
